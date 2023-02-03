@@ -16,7 +16,7 @@ int main(){
     cout << "The entered array is: ";
     for (int i = 0; i < n; i++)
     {
-        cout << arr[i] << "";
+        cout << arr[i] << " ";
     }
     cout << endl;
     int sum=0;

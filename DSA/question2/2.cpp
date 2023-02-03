@@ -29,6 +29,6 @@ int main(){
         
     }
     // printing the maximum value
-    cout<<max;
+    cout<<"The largest number in the array is: "<<max;
     return 0;
 }
