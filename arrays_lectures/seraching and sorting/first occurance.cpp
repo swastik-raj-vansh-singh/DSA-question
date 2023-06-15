@@ -1,64 +1,42 @@
 #include <iostream>
-#include<algorithm>
 #include<vector>
+#include<algorithm>
 using namespace std;
 
-int binarySearch(int arr[], int size, int target) {
-  int start = 0;
-  int end = size - 1;
+int firstOcc(vector<int> arr, int target) {
+  int s = 0;
+  int e = arr.size() - 1;
+  int mid = s + (e-s)/2;
+  int ans = -1;
 
-  int mid = start + (end - start ) / 2;
-
-  while(start <= end) {
-    int element = arr[mid];
-
-    if(element == target) {//element found, then return index
-      return mid;
+  while(s <= e) {
+    if(arr[mid] == target) {
+      //ans store
+      ans = mid;
+      //left search
+      e = mid - 1;
     }
-    
-    if(target < element) {
-      //search in left
-      end = mid - 1;
+    else if(target < arr[mid] ) {
+      //left me search
+      e = mid - 1;
     }
-    else {
-      //search in right
-      start = mid + 1;
+    else if(target > arr[mid] ) {
+      //right search
+      s = mid + 1;
     }
-
-    mid = start + (end - start ) / 2;
-
+    mid = s + (e-s)/2;
   }
-
-  //element not found
-  return -1;
-
+  return ans;
 }
 
 int main() {
-  // int arr[] = {2,4,6,8,10,12,16};
-  // int size = 7;
-  // int target = 20;
+  vector<int> v{1,3,3,3,3,3,3,4,4,4,4,6,7};
+  int target = 4;
 
-  // int indexOftarget = binarySearch(arr, size, target);
+  int ans = firstOcc(v, target);
+  cout << "ans is. "<< ans << endl;
 
-  // if(indexOftarget == -1) {
-  //   cout << "target not found" << endl;
-  // }
-  // else  {
-  //   cout << "target found at " << indexOftarget <<" index " << endl;
-  // }
-
-  vector<int> v{1,2,3,4,5,6};
-  int arr[] = {1,2,3,4,5,6,7 };
-  int size = 7;
-
-  if(binary_search(arr, arr + size, 7)) {
-    cout << "Found" << endl;
-  }
-  else {
-    cout << "Not found. " << endl;
-  }
-
-
+  auto ans2 = lower_bound (v.begin(), v.end(), target);
+  cout << "ans2 is " << ans2-v.begin() << endl;
   return 0;
 }
